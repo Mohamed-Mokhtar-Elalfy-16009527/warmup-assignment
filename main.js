@@ -116,7 +116,7 @@ function addShiftRecord(textFile, shiftObj) {
     };
 }
 
-// Function 6 [cite: 190-200]
+// Function 6 
 function setBonus(textFile, driverID, date, newValue) {
     let lines = fs.readFileSync(textFile, 'utf8').trim().split('\n');
     let updatedLines = lines.map(line => {
@@ -129,7 +129,7 @@ function setBonus(textFile, driverID, date, newValue) {
     fs.writeFileSync(textFile, updatedLines.join('\n') + '\n');
 }
 
-// Function 7 [cite: 211-218]
+// Function 7 
 function countBonusPerMonth(textFile, driverID, month) {
     let lines = fs.readFileSync(textFile, 'utf8').trim().split('\n');
     let driverFound = false;
@@ -141,7 +141,7 @@ function countBonusPerMonth(textFile, driverID, month) {
         if (p[0] === driverID) {
             driverFound = true;
             let recordMonth = p[2].split('-')[1];
-            // Check for the string "true" as it appears in the text file
+           
             if (recordMonth === searchMonth && p[9].trim() === 'true') {
                 count++;
             }
@@ -150,7 +150,7 @@ function countBonusPerMonth(textFile, driverID, month) {
     return driverFound ? count : -1;
 }
 
-// Function 8 [cite: 239-245]
+// Function 8 
 function getTotalActiveHoursPerMonth(textFile, driverID, month) {
     let lines = fs.readFileSync(textFile, 'utf8').trim().split('\n');
     let totalSec = 0;
@@ -165,7 +165,7 @@ function getTotalActiveHoursPerMonth(textFile, driverID, month) {
     return fromSeconds(totalSec);
 }
 
-// Function 9 [cite: 252-263]
+// Function 9 
 function getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, month) {
     let rates = fs.readFileSync(rateFile, 'utf8').trim().split('\n');
     let driverRateLine = rates.find(l => l.startsWith(driverID));
@@ -189,7 +189,7 @@ function getRequiredHoursPerMonth(textFile, rateFile, bonusCount, driverID, mont
     return fromSeconds(Math.max(0, finalSeconds));
 }
 
-// Function 10 [cite: 274-286]
+// Function 10 
 function getNetPay(driverID, actualHours, requiredHours, rateFile) {
     let rates = fs.readFileSync(rateFile, 'utf8').trim().split('\n');
     let line = rates.find(l => l.startsWith(driverID)).split(',');
@@ -209,7 +209,7 @@ function getNetPay(driverID, actualHours, requiredHours, rateFile) {
     return basePay - (billableHours * deductionRate);
 }
 
-// Ensure the module exports ALL 10 functions
+
 module.exports = {
     getShiftDuration,
     getIdleTime,
